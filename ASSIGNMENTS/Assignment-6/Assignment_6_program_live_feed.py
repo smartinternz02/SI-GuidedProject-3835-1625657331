@@ -18,7 +18,7 @@ while True:
     #detect the faces from the video using detectMultiScale function
     faces=face_classifier.detectMultiScale(gray,1.3,5)
     eyes=eye_classifier.detectMultiScale(gray,1.3,5)
-    smile = smile_classifier.detectMultiScale(gray,1.3,5)
+    smile = smile_classifier.detectMultiScale(gray,1.3,10)
     print(faces)
     
     #drawing rectangle boundries for the detected face

@@ -11,6 +11,9 @@ face_classifier=cv2.CascadeClassifier("haarcascade_frontalcatface.xml")
 
 
 video=cv2.VideoCapture("videoplayback.mp4")
+frame_width = int(video.get(3))
+frame_height = int(video.get(4))
+out = cv2.VideoWriter('output_CAT.avi',cv2.VideoWriter_fourcc('M','J','P','G'), 10, (frame_width,frame_height))
 
 while True:
     #capture the first frame
@@ -26,15 +29,16 @@ while True:
     for(x,y,w,h) in faces:
         cv2.rectangle(frame, (x,y), (x+w,y+h), (255,0,0), 2)
         cv2.imshow('Face detection', frame)
+        out.write(frame)
         #picname=datetime.datetime.now().strftime("%y-%m-%d-%H-%M")
         #cv2.imwrite(picname+".jpg",frame)
         
-    
     #waitKey(1)- for every 1 millisecond new frame will be captured
     Key=cv2.waitKey(1)
     if Key==ord('q'):
         #release the camera
         #video.release()
         #destroy all windows
+        out.release()
         cv2.destroyAllWindows()
         break
